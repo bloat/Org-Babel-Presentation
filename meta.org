@@ -1,0 +1,175 @@
+#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+* Org Babel Clojure/Script
+** Introduction
+ - ME Andrew Cowper - Clojure user since beginning of 2009
+** Org Mode
+*** Your life in plain text
+M-<right> - indent list further
+
+S-<right> - change bullet style
+
+What is org mode?
+ - Carsten Dominik
+ - Org for organisation
+ - Applications
+   1. day planner
+   2. project manager
+   3. Note taker
+   4. mind mapper
+   5. GTD (David Allen)
+   6. Pomodoro technique (Francesco Cirillo)
+ - Markup
+   1. doucment authoring
+   2. export
+*** Tree Structure
+Folding / fold different parts 
+*** Lists / Tables
+ - Lists / Checkboxes
+ - Spread sheet
+**** List with CB [0/2]
+ - [ ] Hello
+ - [ ] there
+**** Spreadsheet
+C-c * / C-u C-c *
+C-c '     
+     | Item       | Price | Remaining |
+     |------------+-------+-----------|
+     |            |       |      2000 |
+     | Food       |   300 |      1700 |
+     | Petrol     |   200 |      1500 |
+     | Beer       |   100 |      1400 |
+     | Train fare |    50 |      1350 |
+     | Holidays   |   100 |      1250 |
+     #+TBLFM: @3$3..@>$3=@-1$3-$2
+*** Time
+**** <2012-09-01 Sat> Mid Sep Dojo
+**** TODO Write org babel talk (C-c C-d)
+     DEADLINE: <2012-08-31 Fri>
+**** Clojure Exchange <2012-12-14 Fri>--<2012-12-16 Sun>
+**** Agenda
+C-c a L
+*** Export
+C-c C-e
+*** extensions
+ - [[http://orgmode.org/worg/org-contrib/index.html][Extensions]]
+ - org remember
+ - contacts / exports / notifications
+ - org babel
+** Babel
+*** Literate Programming
+ - Anyone use javadoc?
+ - Proposed by Knuth in the 1970's
+ - What are programs for? Communicating with a computer or a human?
+ - Obviously both, but which is more important
+ - Literate programming emphasises communication with the human
+ - Tex / Lisp in Small Pieces / Select
+ - I will show some of what Org can do, but there is another level
+ - Web - symbols can stand for code blocks which are written elsewhere
+ - Allows for the code to be written in a human friendly order, rather than compiler friendly.
+ - Tangle - produces source files suitable for the compiler
+ - weave - produces documentation
+*** Reproducible Research
+ - A piece of research can include not only its results
+ - It can also include all the complete environment that produced the results, so anyone can reproduce the research.
+ - This is probably easiest for computer science research - where the environment can simply be a test file.
+ - Literate programming goes well with RR because a single file can generate a properly formatted paper and the programs which generate the results.
+*** Babel Mode
+**** Source code blocks
+Editing in language mode
+C-c ' edit
+C-c eval
+C-c C-v d new block
+simple example - first no results - second results
+:results silent
+#+BEGIN_SRC clojurescript :results silent
+  (defn some-clj [n] (+ n 1))
+#+END_SRC
+
+#+BEGIN_SRC clojurescript
+  (some-clj 41)
+#+END_SRC
+
+#+RESULTS:
+: 42
+
+Show result types :results scalar table list
+#+BEGIN_SRC elisp :results list
+  (mapcar (lambda (x) (+ x 1)) '(40 41 42))
+#+END_SRC
+
+#+RESULTS:
+- 41
+- 42
+- 43
+
+**** Running Code
+***** Inputs
+#+tblname: fibonacci-inputs
+| 1 | 2 | 3 | 4 |  5 |  6 |  7 |  8 |  9 | 10 |
+| 2 | 4 | 6 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 
+
+#+name: fibonacci-seq(fib-inputs=fibonacci-inputs)
+#+begin_src emacs-lisp :exports both :tangle fib.el
+  (defun fibonacci (n)
+    (if (or (= n 0) (= n 1))
+        n
+      (+ (fibonacci (- n 1)) (fibonacci (- n 2)))))
+  
+  (mapcar (lambda (row)
+            (mapcar #'fibonacci row)) fib-inputs)
+#+end_src
+
+#+RESULTS: fibonacci-seq
+| 1 | 1 | 2 |  3 |  5 |   8 |  13 |  21 |   34 |   55 |
+| 1 | 3 | 8 | 21 | 55 | 144 | 377 | 987 | 2584 | 6765 |
+
+**** Handling Results
+This function cleverly scrapes eventbrite and even runs the javascript
+to count the attendee list.
+#+begin_src clojurescript :results silent :tangle dojo.cljs
+  (defn scrape-event-brite-for-attendee-list [dojo-date]
+    (+ 20 (rand-int 10)))
+#+end_src
+
+#+name: dojo-attendees(x="<2012-08-30 Thu>") 
+#+begin_src clojurescript 
+  (scrape-event-brite-for-attendee-list x)
+#+end_src
+
+#+RESULTS: dojo-attendees
+: 26
+
+#+tblname: dojo-history
+| Dojo Date        | Attendees |
+|------------------+-----------|
+| <2012-08-28 Tue> |        25 |
+| <2012-08-15 Wed> |        23 |
+| <2012-09-10 Mon> |        25 |
+#+TBLFM: $2='(sbe "dojo-attendees" (x $$1)))
+
+#+name: table-avg(tbl=dojo-history)
+#+begin_src clojurescript :exports both
+  (/ (reduce + (map second tbl)) (count tbl))
+#+end_src
+
+#+RESULTS: table-avg
+: 24.333333333333332
+
+**** Exporting to code
+Tangling
+C-c C-v t
+Noweb macros to reorder code
+Whats the difference between javadoc and LP?
+**** Exporting to document
+C-c C-e b
+HTML / Latex / Docbook / etc.
+** ClojureScript Automata
+*** An Example
+[[http://git.slothrop.net][Automata]] 
+** Bibliography / Credits
+[[http://orgmode.org][Org]]
+[[http://tug.org/texlive/devsrc/Build/source/texk/web2c/tex.web][TeX]]
+[[http://moonflare.com/code/select/index.php][Select]]
+[[mailto:andrew.cowper@slothrop.net][Andrew Cowper]]
+[[https://github.com/bloat][Github]]
+[[http://twitter.com/magic_bloat][Twitter]]

@@ -1,0 +1,17 @@
+#+STYLE: <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+#+TITLE: Links for my Org Babel Clojure presentation
+#+DATE: June 2012
+#+EMAIL: andrew.cowper@slothrop.net
+#+OPTIONS: num:nil toc:nil email:t
+* An Example
+This is a small Clojurescript application written in a literate style using Org 
+
+[[http://git.slothrop.net][Automata]]
+* Links
+- [[http://orgmode.org][Org]]
+- [[http://tug.org/texlive/devsrc/Build/source/texk/web2c/tex.web][TeX source]]
+- [[http://moonflare.com/code/select/index.php][Select algorithm literate programming example]]
+- [[mailto:andrew.cowper@slothrop.net][My email]]
+- [[https://github.com/bloat][My github]]
+- [[http://twitter.com/magic_bloat][My twitter]]
+- [[http://git.slothrop.net][My website]]
