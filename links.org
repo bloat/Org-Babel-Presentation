@@ -6,12 +6,14 @@
 * An Example
 This is a small Clojurescript application written in a literate style using Org 
 
-[[http://git.slothrop.net][Automata]]
+[[http://git.slothrop.net/automata][Automata]]
 * Links
 - [[http://orgmode.org][Org]]
 - [[http://tug.org/texlive/devsrc/Build/source/texk/web2c/tex.web][TeX source]]
 - [[http://moonflare.com/code/select/index.php][Select algorithm literate programming example]]
-- [[mailto:andrew.cowper@slothrop.net][My email]]
-- [[https://github.com/bloat][My github]]
-- [[http://twitter.com/magic_bloat][My twitter]]
-- [[http://git.slothrop.net][My website]]
+
+* Contact Me
+- [[http://git.slothrop.net][website]]
+- [[mailto:andrew.cowper@slothrop.net][email]]
+- [[https://github.com/bloat][github]]
+- [[http://twitter.com/magic_bloat][twitter]]
