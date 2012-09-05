@@ -1,0 +1,22 @@
+body {
+    background-color: Bisque;
+    font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+}
+
+#content {
+    width: 85%;
+    margin: 0 auto;
+    line-height: 150%;
+}
+
+.src-clojurescript {
+    font-family: Lucida Console, Monaco, monospace;
+    background-color: DarkSlateGray;
+    color: Cornsilk;
+}
+
+.src-clojure {
+    font-family: Lucida Console, Monaco, monospace;
+    background-color: DarkSlateGray;
+    color: Cornsilk;
+}
